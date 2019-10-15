@@ -22,6 +22,13 @@ import * as MonitorChartV2 from "Fx/Controls/MonitorChartV2";
 ...
 
 // Create the MonitorChart options
+const timespan: MonitorChartV2.Timespan = {
+    relative: {
+        /* One day in Milliseconds */
+        duration: 1 * 24 * 60 * 60 * 1000
+    }
+};
+
 const chartInputs: MonitorChartV2.Options = {
             metrics: [
                 {
@@ -31,18 +38,12 @@ const chartInputs: MonitorChartV2.Options = {
                     name: "exceptions/count",
                     aggregationType: MonitorChartV2.Metric.AggregationType.Sum
                 }
-            ]
-};
-
-const const timespan: MonitorChartV2.Timespan = {
-    relative: {
-        /* One day in Milliseconds */
-        duration: 1 * 24 * 60 * 60 * 1000
-    }
+            ],
+            timespan
 };
 
 // Create the MonitorChart viewmodel
-const monitorChartViewModel =MonitorChartV2.create(bladeOrPartContainer, monitorChartOptions);
+const monitorChartViewModel = MonitorChartV2.create(bladeOrPartContainer, chartInputs);
 ```
 
 > You can plot more than one metric on the chart referencing the control. Also you can specify the dimensions to segment the data by and set of filters to filter the data.
